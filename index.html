@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北海道美眉 | 深度旅行企劃家</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hokkaido-red': '#E53E3E',
+                        'hokkaido-light-red': '#FED7D7',
+                        'hokkaido-pink': '#FBB6CE',
+                        'hokkaido-cream': '#FFFAF0',
+                        'hokkaido-snow': '#F7FAFC',
+                        'hokkaido-text': '#2D3748',
+                        'hokkaido-light': '#718096'
+                    },
+                    fontFamily: {
+                        'chinese': ['Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(229, 62, 62, 0.15);
+        }
+        .hokkaido-gradient {
+            background: linear-gradient(135deg, #E53E3E 0%, #FC8181 50%, #FBB6CE 100%);
+        }
+        .snow-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-hokkaido-cream min-h-screen">
+    <!-- Header Navigation -->
+    <nav class="hokkaido-gradient text-white snow-pattern">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#tours" class="hover:text-hokkaido-light-red transition-colors">旅遊團</a>
+                    <a href="#products" class="hover:text-hokkaido-light-red transition-colors">精選商品</a>
+                    <a href="#rental" class="hover:text-hokkaido-light-red transition-colors">租車服務</a>
+                    <a href="#inquiry" class="hover:text-hokkaido-light-red transition-colors">客製規劃</a>
+                    <a href="#resources" class="hover:text-hokkaido-light-red transition-colors">旅行資源</a>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button class="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm transition-colors">
+                        <span>❄️</span>
+                        <span>訂閱北海道情報</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Profile Header -->
+        <div class="text-center mb-10">
+            <div class="w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-hokkaido-red shadow-lg">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face" 
+                     alt="北海道美眉" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-3xl font-bold text-hokkaido-text mb-3">🍎 北海道美眉的私藏清單</h1>
+            <p class="text-lg text-hokkaido-light mb-2">住在北海道 | 日本深度旅行設計師</p>
+            <p class="text-hokkaido-light mb-6">帶你探索不在觀光書上的在地風景 ✨ 每週更新私房景點</p>
+            
+            <!-- Stats -->
+            <div class="flex justify-center space-x-8 text-sm text-hokkaido-light mb-6">
+                <span>📝 193 篇分享</span>
+                <span>👥 1.4萬 追蹤者</span>
+                <span>❤️ 349 人追蹤中</span>
+            </div>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="w-12 h-12 bg-hokkaido-red rounded-full flex items-center justify-center text-white hover:bg-opacity-90 transition-all">
+                    📧
+                </a>
+                <a href="#" class="w-12 h-12 bg-hokkaido-red rounded-full flex items-center justify-center text-white hover:bg-opacity-90 transition-all">
+                    📱
+                </a>
+                <a href="#" class="w-12 h-12 bg-hokkaido-red rounded-full flex items-center justify-center text-white hover:bg-opacity-90 transition-all">
+                    📺
+                </a>
+            </div>
+        </div>
+
+        <!-- Available Tours Section -->
+        <div id="tours" class="mb-12">
+            <h2 class="text-2xl font-bold text-hokkaido-text mb-2 text-center">🗾 限定旅遊團</h2>
+            <p class="text-center text-hokkaido-light mb-8">專為懂玩的你設計的深度行程</p>
+            
+            <div class="grid gap-6">
+                <!-- 櫻花季特別企劃 -->
+                <div class="bg-white border-2 border-hokkaido-light-red rounded-xl p-6 card-hover">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-hokkaido-text mb-2">🌸 櫻花季秘境巡禮</h3>
+                            <p class="text-hokkaido-light mb-3">東京 → 京都 → 吉野山 → 青森弘前</p>
+                            <div class="flex flex-wrap gap-4 text-sm">
+                                <span class="bg-hokkaido-light-red px-3 py-1 rounded-full">📅 2025/3/25-4/5</span>
+                                <span class="bg-hokkaido-pink px-3 py-1 rounded-full">👥 僅剩3席</span>
+                                <span class="bg-hokkaido-light-red px-3 py-1 rounded-full">🏠 傳統溫泉旅館</span>
+                            </div>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-2xl font-bold text-hokkaido-red">¥285,000</p>
+                            <p class="text-sm text-hokkaido-light">每人</p>
+                        </div>
+                    </div>
+                    <p class="text-hokkaido-light text-sm mb-4">12天深度體驗，包含私人茶道、秘境賞櫻點、懷石料理體驗。專業在地導遊，小團制精緻服務。</p>
+                    <button onclick="openBookingForm('cherry-blossom')" 
+                            class="w-full bg-hokkaido-red text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
+                        立即預約 🌸
+                    </button>
+                </div>
+
+                <!-- 北海道冬季限定 -->
+                <div class="bg-white border-2 border-hokkaido-light-red rounded-xl p-6 card-hover">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-hokkaido-text mb-2">❄️ 北海道冬日物語</h3>
+                            <p class="text-hokkaido-light mb-3">札幌 → 新雪谷 → 函館 → 旭川</p>
+                            <div class="flex flex-wrap gap-4 text-sm">
+                                <span class="bg-hokkaido-light-red px-3 py-1 rounded-full">📅 2025/2/10-2/20</span>
+                                <span class="bg-hokkaido-pink px-3 py-1 rounded-full">👥 還有7席</span>
+                                <span class="bg-hokkaido-light-red px-3 py-1 rounded-full">🦀 螃蟹吃到飽</span>
+                            </div>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-2xl font-bold text-hokkaido-red">¥195,000</p>
+                            <p class="text-sm text-hokkaido-light">每人</p>
+                        </div>
+                    </div>
+                    <p class="text-hokkaido-light text-sm mb-4">10天雪國體驗，雪祭、滑雪、溫泉、海鮮。在地人才知道的隱藏美食，讓你的味蕾也去旅行。</p>
+                    <button onclick="openBookingForm('hokkaido-winter')" 
+                            class="w-full bg-hokkaido-red text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
+                        搶先預訂 ❄️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div id="products" class="mb-12">
+            <h2 class="text-2xl font-bold text-hokkaido-text mb-2 text-center">🛍️ 精選商品</h2>
+            <p class="text-center text-hokkaido-light mb-8">美眉親自挑選的質感好物</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 趣味酒杯預訂 -->
+                <div class="bg-white border-2 border-hokkaido-light-red rounded-xl p-6 card-hover">
+                    <div class="text-center mb-4">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-hokkaido-light-red rounded-full flex items-center justify-center">
+                            <span class="text-3xl">🍶</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-hokkaido-text mb-2">趣味酒杯預訂</h3>
+                        <p class="text-hokkaido-light text-sm mb-4">北海道在地工藝師手作，每個都有獨特的故事。限量款式，錯過不再。</p>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center p-3 bg-hokkaido-snow rounded-lg">
+                            <span class="font-medium">雪花紋清酒杯</span>
+                            <span class="text-hokkaido-red font-bold">¥8,500</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-hokkaido-snow rounded-lg">
+                            <span class="font-medium">櫻花限定對杯</span>
+                            <span class="text-hokkaido-red font-bold">¥15,800</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-hokkaido-snow rounded-lg">
+                            <span class="font-medium">北海道熊造型杯</span>
+                            <span class="text-hokkaido-red font-bold">¥6,200</span>
+                        </div>
+                    </div>
+                    <button onclick="openBookingForm('sake-cups')" 
+                            class="w-full bg-hokkaido-red text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
+                        預訂酒杯 🍶
+                    </button>
+                </div>
+
+                <!-- 鱿鱼酒壶購買 -->
+                <div class="bg-white border-2 border-hokkaido-light-red rounded-xl p-6 card-hover">
+                    <div class="text-center mb-4">
+                        <div class="w-20 h-20 mx-auto mb-4 bg-hokkaido-light-red rounded-full flex items-center justify-center">
+                            <span class="text-3xl">🦑</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-hokkaido-text mb-2">鱿鱼酒壺收藏</h3>
+                        <p class="text-hokkaido-light text-sm mb-4">函館漁師傳統工藝，真正的鱿鱼製作。每個都是獨一無二的藝術品。</p>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center p-3 bg-hokkaido-snow rounded-lg">
+                            <span class="font-medium">經典款鱿鱼壺</span>
+                            <span class="text-hokkaido-red font-bold">¥12,000</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-hokkaido-snow rounded-lg">
+                            <span class="font-medium">大型收藏版</span>
+                            <span class="text-hokkaido-red font-bold">¥18,500</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-hokkaido-snow rounded-lg">
+                            <span class="font-medium">迷你裝飾版</span>
+                            <span class="text-hokkaido-red font-bold">¥7,800</span>
+                        </div>
+                    </div>
+                    <button onclick="openPurchaseForm('squid-flask')" 
+                            class="w-full bg-hokkaido-red text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
+                        購買酒壺 🦑
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Car Rental Section -->
+        <div id="rental" class="mb-12">
+            <h2 class="text-2xl font-bold text-hokkaido-text mb-2 text-center">🚗 租車服務</h2>
+            <p class="text-center text-hokkaido-light mb-8">與信賴的租車夥伴合作，享受專屬優惠</p>
+            
+            <div class="bg-gradient-to-r from-hokkaido-light-red to-hokkaido-pink p-6 rounded-xl">
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="font-bold text-hokkaido-text mb-2">🏔️ 北海道專案</h4>
+                        <p class="text-sm text-hokkaido-light mb-3">適合雪地駕駛，包含雪鏈</p>
+                        <p class="text-hokkaido-red font-bold text-lg">8折優惠</p>
+                        <button onclick="openAffiliateLink('hokkaido-rental')" 
+                                class="mt-3 w-full bg-hokkaido-red text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+                            立即預訂
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="font-bold text-hokkaido-text mb-2">🌸 本州巡遊</h4>
+                        <p class="text-sm text-hokkaido-light mb-3">經濟型車款，適合城市旅遊</p>
+                        <p class="text-hokkaido-red font-bold text-lg">75折優惠</p>
+                        <button onclick="openAffiliateLink('honshu-rental')" 
+                                class="mt-3 w-full bg-hokkaido-red text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+                            查看車款
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="font-bold text-hokkaido-text mb-2">🏕️ 露營車款</h4>
+                        <p class="text-sm text-hokkaido-light mb-3">完整設備，深度探索日本</p>
+                        <p class="text-hokkaido-red font-bold text-lg">9折優惠</p>
+                        <button onclick="openAffiliateLink('camping-rental')" 
+                                class="mt-3 w-full bg-hokkaido-red text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+                            預約試駕
+                        </button>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <p class="text-white text-sm">✨ 使用美眉專屬連結預訂，還可獲得免費旅遊諮詢服務</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Travel Inquiry Section -->
+        <div id="inquiry" class="mb-12">
+            <h2 class="text-2xl font-bold text-hokkaido-text mb-2 text-center">💬 客製化旅遊規劃</h2>
+            <p class="text-center text-hokkaido-light mb-8">告訴我你的需求，讓我為你打造專屬的日本之旅</p>
+            
+            <div class="bg-white border-2 border-hokkaido-light-red rounded-xl p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold text-hokkaido-text mb-4">🎯 我能為你做什麼</h3>
+                        <ul class="space-y-3 text-hokkaido-light">
+                            <li class="flex items-start space-x-3">
+                                <span class="text-hokkaido-red">✓</span>
+                                <span>量身打造行程規劃</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-hokkaido-red">✓</span>
+                                <span>在地美食推薦</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-hokkaido-red">✓</span>
+                                <span>住宿訂房協助</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-hokkaido-red">✓</span>
+                                <span>交通票券代購</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-hokkaido-red">✓</span>
+                                <span>緊急狀況支援</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-hokkaido-text mb-4">💝 服務方案</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-hokkaido-snow rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold">基礎諮詢</span>
+                                    <span class="text-hokkaido-red font-bold">免費</span>
+                                </div>
+                                <p class="text-sm text-hokkaido-light">30分鐘線上諮詢</p>
+                            </div>
+                            <div class="p-4 bg-hokkaido-snow rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold">詳細規劃</span>
+                                    <span class="text-hokkaido-red font-bold">¥15,000</span>
+                                </div>
+                                <p class="text-sm text-hokkaido-light">完整行程+預訂服務</p>
+                            </div>
+                            <div class="p-4 bg-hokkaido-snow rounded-lg">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold">全程陪同</span>
+                                    <span class="text-hokkaido-red font-bold">面議</span>
+                                </div>
+                                <p class="text-sm text-hokkaido-light">專屬導遊服務</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <button onclick="openInquiryForm()" 
+                            class="bg-hokkaido-red text-white py-4 px-8 rounded-lg hover:bg-opacity-90 transition-colors font-bold text-lg">
+                        開始規劃我的旅程 ✈️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Travel Resources Section -->
+        <div id="resources" class="mb-12">
+            <h2 class="text-2xl font-bold text-hokkaido-text mb-2 text-center">📚 旅行資源</h2>
+            <p class="text-center text-hokkaido-light mb-8">多年來累積的實用資訊，全部分享給你</p>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="#" class="card-hover block p-4 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-hokkaido-light-red rounded-lg flex items-center justify-center">
+                            <span class="text-hokkaido-red text-xl">🏨</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text">推薦住宿清單</h3>
+                            <p class="text-sm text-hokkaido-light">精選日本各地優質旅館</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-4 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-hokkaido-light-red rounded-lg flex items-center justify-center">
+                            <span class="text-hokkaido-red text-xl">🛍️</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text">購物指南</h3>
+                            <p class="text-sm text-hokkaido-light">血拚必買清單大公開</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-4 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-hokkaido-light-red rounded-lg flex items-center justify-center">
+                            <span class="text-hokkaido-red text-xl">💳</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text">旅遊信用卡</h3>
+                            <p class="text-sm text-hokkaido-light">最划算的回饋卡推薦</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-4 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-hokkaido-light-red rounded-lg flex items-center justify-center">
+                            <span class="text-hokkaido-red text-xl">✈️</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text">機票攻略</h3>
+                            <p class="text-sm text-hokkaido-light">搶便宜機票的秘密武器</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-4 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-hokkaido-light-red rounded-lg flex items-center justify-center">
+                            <span class="text-hokkaido-red text-xl">📱</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text">實用APP</h3>
+                            <p class="text-sm text-hokkaido-light">旅行必備軟體推薦</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-4 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-hokkaido-light-red rounded-lg flex items-center justify-center">
+                            <span class="text-hokkaido-red text-xl">📧</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text">每週電子報</h3>
+                            <p class="text-sm text-hokkaido-light">最新旅遊資訊直送信箱</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-hokkaido-light">
+            <div class="border-t border-hokkaido-light-red pt-8 mb-6">
+                <p class="font-medium text-hokkaido-text mb-2">與我聯繫</p>
+                <p class="text-sm mb-4">📧 hokkaido.meimei@email.com | 📱 LINE: @hokkaido_meimei</p>
+                <p class="text-xs">© 2025 北海道美眉 | 用心分享，誠意服務 ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Open booking forms
+        function openBookingForm(type) {
+            const formUrls = {
+                'cherry-blossom': 'https://forms.google.com/your-cherry-blossom-form',
+                'hokkaido-winter': 'https://forms.google.com/your-hokkaido-winter-form',
+                'sake-cups': 'https://forms.google.com/your-sake-cups-booking-form'
+            };
+            window.open(formUrls[type] || 'https://forms.google.com', '_blank');
+        }
+
+        // Open purchase forms
+        function openPurchaseForm(type) {
+            const purchaseUrls = {
+                'squid-flask': 'https://forms.google.com/your-squid-flask-purchase-form'
+            };
+            window.open(purchaseUrls[type] || 'https://forms.google.com', '_blank');
+        }
+
+        // Open affiliate links
+        function openAffiliateLink(type) {
+            const affiliateUrls = {
+                'hokkaido-rental': 'https://your-affiliate-link-hokkaido',
+                'honshu-rental': 'https://your-affiliate-link-honshu', 
+                'camping-rental': 'https://your-affiliate-link-camping'
+            };
+            window.open(affiliateUrls[type] || 'https://your-default-affiliate-link', '_blank');
+        }
+
+        // Open inquiry form
+        function openInquiryForm() {
+            window.open('https://forms.google.com/your-travel-inquiry-form', '_blank');
+        }
+
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Add loading animations
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
