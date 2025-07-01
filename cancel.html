@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>付款取消 | 日本旅行企劃家の私藏清單</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hokkaido-red': '#E53E3E',
+                        'hokkaido-light-red': '#FED7D7',
+                        'hokkaido-pink': '#FBB6CE',
+                        'hokkaido-cream': '#FFFAF0',
+                        'hokkaido-snow': '#F7FAFC',
+                        'hokkaido-text': '#2D3748',
+                        'hokkaido-light': '#718096'
+                    },
+                    fontFamily: {
+                        'chinese': ['Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+        .hokkaido-gradient {
+            background: linear-gradient(135deg, #E53E3E 0%, #FC8181 50%, #FBB6CE 100%);
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-hokkaido-cream min-h-screen flex items-center justify-center">
+    <div class="max-w-md mx-auto px-4">
+        <div class="bg-white rounded-2xl p-8 text-center shadow-xl border border-hokkaido-light-red fade-in">
+            <!-- Cancel Icon -->
+            <div class="mb-6">
+                <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-4xl">⚠️</span>
+                </div>
+                <h1 class="text-2xl font-bold text-hokkaido-text mb-2">付款已取消</h1>
+                <p class="text-hokkaido-light text-sm">沒關係，您隨時都可以回來購買</p>
+            </div>
+
+            <!-- Reason -->
+            <div class="bg-orange-50 rounded-lg p-4 mb-6">
+                <h2 class="font-semibold text-hokkaido-text mb-2 text-sm">為什麼會取消付款？</h2>
+                <ul class="text-xs text-hokkaido-light text-left space-y-1">
+                    <li>• 您主動取消了付款流程</li>
+                    <li>• 付款資訊填寫不完整</li>
+                    <li>• 網路連線問題導致中斷</li>
+                    <li>• 信用卡額度不足或其他銀行問題</li>
+                </ul>
+            </div>
+
+            <!-- Reassurance -->
+            <div class="space-y-3 mb-6">
+                <div class="text-left">
+                    <h3 class="font-semibold text-hokkaido-text mb-2 text-sm">別擔心！</h3>
+                    <ul class="space-y-2 text-xs text-hokkaido-light">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">💳</span>
+                            <span>沒有任何費用被扣款</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">🛒</span>
+                            <span>商品依然可以購買</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">💬</span>
+                            <span>有問題可以隨時聯繫我們</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">📞</span>
+                            <span>可透過客服協助完成訂購</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="border-t border-hokkaido-light-red pt-4 mb-6">
+                <p class="text-xs text-hokkaido-light mb-2">需要幫助嗎？</p>
+                <p class="text-xs text-hokkaido-text">📧 hokkaido.meimei@email.com</p>
+                <p class="text-xs text-hokkaido-text">📱 LINE: @hokkaido_meimei</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2">
+                <a href="/#products" class="block w-full bg-hokkaido-red text-white py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors font-medium text-sm">
+                    重新嘗試購買 🛒
+                </a>
+                <a href="/" class="block w-full bg-gray-100 text-hokkaido-text py-3 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm">
+                    回到首頁 🏠
+                </a>
+                <button onclick="openContactForm()" class="block w-full bg-green-500 text-white py-3 px-4 rounded-lg hover:bg-green-600 transition-colors font-medium text-sm">
+                    聯繫客服 💬
+                </button>
+            </div>
+
+            <!-- Alternative Contact -->
+            <div class="mt-6 p-4 bg-hokkaido-snow rounded-lg">
+                <h3 class="font-semibold text-hokkaido-text mb-2 text-sm">其他聯繫方式</h3>
+                <div class="grid grid-cols-1 gap-2">
+                    <button onclick="openLineContact()" class="bg-green-600 text-white py-2 px-3 rounded text-xs hover:bg-green-700 transition-colors">
+                        LINE 聯繫客服
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openContactForm() {
+            window.open('https://forms.google.com/your-contact-form', '_blank');
+        }
+
+
+
+        function openLineContact() {
+            window.open('https://line.me/ti/p/@hokkaido_meimei', '_blank');
+        }
+
+        // Auto-redirect to homepage after 10 minutes if user is inactive
+        setTimeout(() => {
+            if (confirm('您已經停留在此頁面一段時間，是否要回到首頁？')) {
+                window.location.href = '/';
+            }
+        }, 600000); // 10 minutes
+    </script>
+</body>
+</html> 

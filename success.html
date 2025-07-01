@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>付款成功 | 日本旅行企劃家の私藏清單</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hokkaido-red': '#E53E3E',
+                        'hokkaido-light-red': '#FED7D7',
+                        'hokkaido-pink': '#FBB6CE',
+                        'hokkaido-cream': '#FFFAF0',
+                        'hokkaido-snow': '#F7FAFC',
+                        'hokkaido-text': '#2D3748',
+                        'hokkaido-light': '#718096'
+                    },
+                    fontFamily: {
+                        'chinese': ['Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+        .hokkaido-gradient {
+            background: linear-gradient(135deg, #E53E3E 0%, #FC8181 50%, #FBB6CE 100%);
+        }
+        .success-animation {
+            animation: bounceIn 1s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-hokkaido-cream min-h-screen flex items-center justify-center">
+    <div class="max-w-md mx-auto px-4">
+        <div class="bg-white rounded-2xl p-8 text-center shadow-xl border border-hokkaido-light-red">
+            <!-- Success Icon -->
+            <div class="success-animation mb-6">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-4xl">✅</span>
+                </div>
+                <h1 class="text-2xl font-bold text-hokkaido-text mb-2">付款成功！</h1>
+                <p class="text-hokkaido-light text-sm">感謝您的購買</p>
+            </div>
+
+            <!-- Order Details -->
+            <div class="bg-hokkaido-snow rounded-lg p-4 mb-6">
+                <h2 class="font-semibold text-hokkaido-text mb-3">訂單資訊</h2>
+                <div id="order-details" class="text-sm text-hokkaido-light">
+                    <p>載入中...</p>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="space-y-3 mb-6">
+                <div class="text-left">
+                    <h3 class="font-semibold text-hokkaido-text mb-2 text-sm">接下來會發生什麼？</h3>
+                    <ul class="space-y-2 text-xs text-hokkaido-light">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">📧</span>
+                            <span>您將收到訂單確認信件</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">📦</span>
+                            <span>我們會在3-5個工作天內安排出貨</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">🚚</span>
+                            <span>出貨後會提供追蹤號碼</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-hokkaido-red">💬</span>
+                            <span>有問題隨時聯繫我們</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="border-t border-hokkaido-light-red pt-4 mb-6">
+                <p class="text-xs text-hokkaido-light mb-2">聯繫資訊</p>
+                <p class="text-xs text-hokkaido-text">📧 hokkaido.meimei@email.com</p>
+                <p class="text-xs text-hokkaido-text">📱 LINE: @hokkaido_meimei</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2">
+                <a href="/" class="block w-full bg-hokkaido-red text-white py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors font-medium text-sm">
+                    回到首頁 🏠
+                </a>
+                <button onclick="window.print()" class="block w-full bg-gray-100 text-hokkaido-text py-3 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm">
+                    列印收據 🖨️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get session ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+
+        if (sessionId) {
+            // Fetch session details (optional - requires backend endpoint)
+            fetch(`/checkout-session/${sessionId}`)
+                .then(response => response.json())
+                .then(session => {
+                    const orderDetails = document.getElementById('order-details');
+                    orderDetails.innerHTML = `
+                        <div class="space-y-1">
+                            <p><strong>訂單編號:</strong> ${session.id}</p>
+                            <p><strong>金額:</strong> ¥${(session.amount_total / 100).toLocaleString()}</p>
+                            <p><strong>付款時間:</strong> ${new Date().toLocaleString('zh-TW')}</p>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching session details:', error);
+                    document.getElementById('order-details').innerHTML = `
+                        <p>訂單編號: ${sessionId}</p>
+                        <p>付款完成時間: ${new Date().toLocaleString('zh-TW')}</p>
+                    `;
+                });
+        } else {
+            document.getElementById('order-details').innerHTML = `
+                <p>感謝您的購買！</p>
+                <p>付款時間: ${new Date().toLocaleString('zh-TW')}</p>
+            `;
+        }
+    </script>
+</body>
+</html> 

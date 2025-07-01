@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<!--
+    ============================================================================
+    🎯 PRODUCT MANAGEMENT GUIDE - READ THIS BEFORE EDITING!
+    ============================================================================
+    
+    TO ADD A NEW PRODUCT:
+    
+    1. 📦 CREATE PRODUCT IN STRIPE DASHBOARD
+       - Get the product ID (e.g., prod_ABC123)
+    
+    2. 🔧 ADD TO server.js - PRODUCTS object (line ~15):
+       'your-product-id': {
+           stripe_id: 'prod_ABC123',
+           name: '🎯 Your Product Name',
+           description: 'Product description',
+           pricing_type: 'tiered',  // or 'simple'
+           tiers: [
+               { up_to: 4, unit_amount: 50000 },    // NT$500 for 1-4 items
+               { up_to: 'inf', unit_amount: 40000 } // NT$400 for 5+ items
+           ],
+           quantity_options: [1, 2, 3, 4, 5, 10]
+       }
+    
+    3. 🎨 ADD HTML SECTION (copy existing product section and modify):
+       - Update product ID in all onclick functions
+       - Update colors, names, descriptions
+       - Update element IDs to match your product
+    
+    4. ✅ THAT'S IT! The universal functions handle everything else automatically.
+    
+    NO NEED TO MODIFY:
+    - JavaScript functions (they're universal now)
+    - API endpoints (they work for all products)
+    - Checkout logic (universal)
+    
+    ============================================================================
+-->
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本旅行企劃家の私藏清單 | 深度旅行企劃家</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hokkaido-red': '#E53E3E',
+                        'hokkaido-light-red': '#FED7D7',
+                        'hokkaido-pink': '#FBB6CE',
+                        'hokkaido-cream': '#FFFAF0',
+                        'hokkaido-snow': '#F7FAFC',
+                        'hokkaido-text': '#2D3748',
+                        'hokkaido-light': '#718096'
+                    },
+                    fontFamily: {
+                        'chinese': ['Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(229, 62, 62, 0.15);
+        }
+        .hokkaido-gradient {
+            background: linear-gradient(135deg, #E53E3E 0%, #FC8181 50%, #FBB6CE 100%);
+        }
+        .snow-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        .mobile-nav {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-nav { display: block; }
+        }
+        .product-item {
+            background: linear-gradient(45deg, #F7FAFC, #FFFAF0);
+            border-left: 4px solid #E53E3E;
+        }
+        .price-highlight {
+            background: linear-gradient(135deg, #E53E3E, #FC8181);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stripe-button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        .stripe-button:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-hokkaido-cream min-h-screen">
+    <!-- Mobile Header Navigation -->
+    <nav class="hokkaido-gradient text-black snow-pattern">
+        <div class="mx-auto px-3">
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav py-2">
+                <div class="text-center mb-2">
+                    <div class="text-sm font-bold">🍎 日本旅行企劃家</div>
+                </div>
+                <div class="grid grid-cols-4 gap-1 text-xs text-center">
+                    <a href="#tours" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">旅行設計</a>
+                    <a href="#products" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">精選商品</a>
+                    <a href="#inquiry" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">客製規劃</a>
+                    <a href="#resources" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">旅行資源</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mx-auto px-3 py-4 max-w-md sm:max-w-2xl lg:max-w-4xl">
+
+        <!-- Available Tours Section -->
+        <div id="tours" class="mb-5">
+            <h2 class="text-base font-bold text-hokkaido-text mb-1 text-center">🗾 日本旅行設計</h2>
+            <p class="text-center text-hokkaido-light mb-3 text-xs">專為你設計的深度行程</p>
+            
+            <div class="space-y-3">
+                <!-- 北陸團特別企劃 -->
+                <div class="bg-white border border-hokkaido-light-red rounded-lg p-3 card-hover">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-bold text-hokkaido-text mb-1">♨️ 北陸團秘境巡禮</h3>
+                            <p class="text-hokkaido-light mb-1 text-xs">東京→下呂温泉</p>
+                            <div class="flex flex-wrap gap-1 text-xs">
+                                <span class="bg-hokkaido-light-red px-2 py-0.5 rounded-full">📅 3/25-4/5</span>
+                                <span class="bg-hokkaido-pink px-2 py-0.5 rounded-full">👥 僅剩3席</span>
+                            </div>
+                        </div>
+                        <div class="text-right ml-2">
+                            <p class="text-base font-bold text-hokkaido-red">NT$9,200</p>
+                        </div>
+                    </div>
+                    <button onclick="openBookingForm('cherry-blossom')" 
+                            class="w-full bg-hokkaido-red text-white py-3 px-3 rounded-md hover:bg-opacity-90 transition-colors font-medium text-sm">
+                        立即預約 🌸
+                    </button>
+                </div>
+
+                <!-- 北海道冬季限定 -->
+                <div class="bg-white border border-hokkaido-light-red rounded-lg p-3 card-hover">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-bold text-hokkaido-text mb-1">❄️ 北海道流氷</h3>
+                            <p class="text-hokkaido-light mb-1 text-xs">札幌→旭川→知床</p>
+                            <div class="flex flex-wrap gap-1 text-xs">
+                                <span class="bg-hokkaido-light-red px-2 py-0.5 rounded-full">📅 2/10-2/20</span>
+                                <span class="bg-hokkaido-pink px-2 py-0.5 rounded-full">👥 還有7席</span>
+                            </div>
+                        </div>
+                        <div class="text-right ml-2">
+                            <p class="text-base font-bold text-hokkaido-red">NT$1,000</p>
+                        </div>
+                    </div>
+                    <button onclick="openBookingForm('hokkaido-winter')" 
+                            class="w-full bg-hokkaido-red text-white py-3 px-3 rounded-md hover:bg-opacity-90 transition-colors font-medium text-sm">
+                        搶先預訂 ❄️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section - Redesigned -->
+        <div id="products" class="mb-5">
+            <h2 class="text-base font-bold text-hokkaido-text mb-1 text-center">🛍️ 精選商品</h2>
+            <p class="text-center text-hokkaido-light mb-3 text-xs">親自挑選的質感好物</p>
+            
+            <!-- 🦑 魷魚酒壺套組 - Premium Featured Product -->
+            <div class="bg-white border-2 border-hokkaido-red rounded-xl p-4 card-hover mb-4 relative overflow-hidden">
+                <!-- Decorative background -->
+                <div class="absolute top-0 right-0 w-20 h-20 bg-hokkaido-light-red rounded-full -translate-y-10 translate-x-10 opacity-20"></div>
+                
+                <div class="relative">
+                    <div class="flex items-center justify-center mb-3">
+                        <div class="hokkaido-gradient text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                            🔥 限時團購 - 買越多省越多
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mb-4">
+                        <h3 class="text-xl font-bold text-hokkaido-text mb-2">🦑 魷魚酒壺套組</h3>
+                        <p class="text-hokkaido-light text-sm mb-3">函館漁師傳統工藝 + 精美小酒杯<br/>獨家限量・無法複製的收藏價值</p>
+                        
+                        <!-- Price Display -->
+                        <div class="bg-hokkaido-light-red p-3 rounded-lg mb-3">
+                            <div class="text-center">
+                                <p id="tiered-pricing-display" class="text-2xl font-bold text-hokkaido-red">NT$750→NT$550</p>
+                                <p class="text-xs text-hokkaido-text">動態優惠計價 • 買越多省越多</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Value Props -->
+                        <div class="grid grid-cols-3 gap-2 text-xs mb-4">
+                            <div class="text-center">
+                                <div class="text-hokkaido-red font-bold">✓</div>
+                                <div class="text-hokkaido-light">傳統工藝</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-hokkaido-red font-bold">✓</div>
+                                <div class="text-hokkaido-light">限量收藏</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-hokkaido-red font-bold">✓</div>
+                                <div class="text-hokkaido-light">送禮首選</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="showQuantityOptions('squid-sake-set')" 
+                                class="hokkaido-gradient hover:shadow-lg text-white py-4 px-6 rounded-lg font-bold text-base flex items-center justify-center space-x-3 transition-all duration-200 mx-auto shadow-md">
+                            <span>🛒</span>
+                            <span>選擇數量並購買</span>
+                        </button>
+                    </div>
+                        
+                    <!-- Quantity Options (initially hidden) -->
+                    <div id="quantity-options" class="mt-3 p-3 bg-hokkaido-light-red rounded-lg border border-hokkaido-red hidden">
+                        <div class="text-sm font-medium text-hokkaido-text mb-3 text-center">🎯 選擇購買數量</div>
+                        
+                        <!-- Quick Select Buttons -->
+                        <div class="mb-4">
+                            <div class="text-xs text-hokkaido-text mb-2">熱門選擇：</div>
+                            <div id="pricing-buttons" class="grid grid-cols-2 gap-2">
+                                <!-- Buttons will be populated dynamically from server -->
+                                <div class="col-span-2 text-center text-xs text-gray-500 py-2">載入失敗，請重試</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Custom quantity input -->  
+                        <div class="p-3 bg-white rounded-lg border border-hokkaido-red">
+                            <div class="text-xs font-medium text-hokkaido-text mb-2 text-center">💡 自定義數量</div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 relative">
+                                    <input type="number" 
+                                           id="custom-quantity" 
+                                           min="1" 
+                                           max="999" 
+                                           value="1"
+                                           oninput="updateCustomPrice('squid-sake-set')"
+                                           onchange="updateCustomPrice('squid-sake-set')"
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-center font-medium focus:ring-2 focus:ring-hokkaido-red focus:border-transparent">
+                                    <span class="absolute right-3 top-2 text-xs text-gray-400">個</span>
+                                </div>
+                                <button onclick="buyCustomQuantity('squid-sake-set')" 
+                                        class="px-4 py-2 hokkaido-gradient hover:shadow-md text-white rounded-lg text-sm font-medium transition-all duration-200">
+                                    購買
+                                </button>
+                            </div>
+                            <div class="text-center mt-2">
+                                <span id="custom-price-display" class="text-sm font-bold text-hokkaido-red bg-hokkaido-light-red px-2 py-1 rounded">NT$750</span>
+                            </div>
+                        </div>
+                        
+                        <button onclick="hideQuantityOptions('squid-sake-set')" 
+                                class="w-full bg-gray-200 hover:bg-gray-300 text-gray-600 py-2 px-3 rounded-lg text-sm font-medium mt-3 transition-colors duration-200">
+                            ✕ 取消選擇
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎌 日本特色商品 - Secondary Product -->
+            <div class="bg-white border border-hokkaido-pink rounded-xl p-4 card-hover mb-4 relative overflow-hidden">
+                <!-- Decorative background -->
+                <div class="absolute top-0 right-0 w-16 h-16 bg-hokkaido-pink rounded-full -translate-y-8 translate-x-8 opacity-30"></div>
+                
+                <div class="relative">
+                    <div class="flex items-center justify-center mb-3">
+                        <div class="bg-hokkaido-pink text-hokkaido-text px-3 py-1 rounded-full text-xs font-bold">
+                            🔥 量購優惠
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mb-4">
+                        <h3 class="text-lg font-bold text-hokkaido-text mb-2">🍶 北海道天然昆布酒杯</h3>
+                        <p class="text-hokkaido-light text-sm mb-3">精選日本商品，品質保證<br/>北海道直送・限時優惠價</p>
+                        
+                        <!-- Price Display -->
+                        <div class="bg-hokkaido-pink p-3 rounded-lg mb-3">
+                            <div class="text-center">
+                                <p id="new-product-pricing-display" class="text-xl font-bold text-hokkaido-red">NT$400→NT$350</p>
+                                <p class="text-xs text-hokkaido-text">動態優惠計價 • 買越多省越多</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="showQuantityOptions('new-product')" 
+                                class="bg-hokkaido-red hover:bg-opacity-90 hover:shadow-lg text-white py-3 px-6 rounded-lg font-bold text-base flex items-center justify-center space-x-3 transition-all duration-200 mx-auto">
+                            <span>🛒</span>
+                            <span>選擇數量並購買</span>
+                        </button>
+                    </div>
+                        
+                    <!-- Quantity Options (initially hidden) -->
+                    <div id="new-product-quantity-options" class="mt-3 p-3 bg-hokkaido-pink rounded-lg border border-hokkaido-red hidden">
+                        <div class="text-sm font-medium text-hokkaido-text mb-3 text-center">🎯 選擇購買數量</div>
+                        
+                        <!-- Quick Select Buttons -->
+                        <div class="mb-4">
+                            <div class="text-xs text-hokkaido-text mb-2">熱門選擇：</div>
+                            <div id="new-product-pricing-buttons" class="grid grid-cols-2 gap-2">
+                                <!-- Buttons will be populated dynamically from server -->
+                                <div class="col-span-2 text-center text-xs text-gray-500 py-2">載入失敗，請重試</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Custom quantity input -->  
+                        <div class="p-3 bg-white rounded-lg border border-hokkaido-red">
+                            <div class="text-xs font-medium text-hokkaido-text mb-2 text-center">💡 自定義數量</div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-1 relative">
+                                    <input type="number" 
+                                           id="new-product-custom-quantity" 
+                                           min="1" 
+                                           max="999" 
+                                           value="1"
+                                           oninput="updateCustomPrice('new-product')"
+                                           onchange="updateCustomPrice('new-product')"
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-center font-medium focus:ring-2 focus:ring-hokkaido-red focus:border-transparent">
+                                    <span class="absolute right-3 top-2 text-xs text-gray-400">個</span>
+                                </div>
+                                <button onclick="buyCustomQuantity('new-product')" 
+                                        class="px-4 py-2 bg-hokkaido-red hover:bg-opacity-90 hover:shadow-md text-white rounded-lg text-sm font-medium transition-all duration-200">
+                                    購買
+                                </button>
+                            </div>
+                            <div class="text-center mt-2">
+                                <span id="new-product-custom-price-display" class="text-sm font-bold text-hokkaido-red bg-hokkaido-light-red px-2 py-1 rounded">NT$400</span>
+                            </div>
+                        </div>
+                        
+                        <button onclick="hideQuantityOptions('new-product')" 
+                                class="w-full bg-gray-200 hover:bg-gray-300 text-gray-600 py-2 px-3 rounded-lg text-sm font-medium mt-3 transition-colors duration-200">
+                            ✕ 取消選擇
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- Travel Inquiry Section -->
+        <div id="inquiry" class="mb-5">
+            <h2 class="text-base font-bold text-hokkaido-text mb-1 text-center">💬 客製化旅遊規劃</h2>
+            <p class="text-center text-hokkaido-light mb-3 text-xs">告訴我你的需求，打造專屬日本之旅</p>
+            
+            <div class="bg-white border border-hokkaido-light-red rounded-lg p-3">
+                <div class="space-y-3 sm:grid sm:grid-cols-2 sm:gap-3 sm:space-y-0">
+                    <div>
+                        <h3 class="text-sm font-bold text-hokkaido-text mb-2">🎯 服務內容</h3>
+                        <ul class="space-y-1 text-hokkaido-light text-xs">
+                            <li class="flex items-start space-x-1">
+                                <span class="text-hokkaido-red text-xs">✓</span>
+                                <span>量身打造行程規劃</span>
+                            </li>
+                            <li class="flex items-start space-x-1">
+                                <span class="text-hokkaido-red text-xs">✓</span>
+                                <span>在地美食推薦</span>
+                            </li>
+                            <li class="flex items-start space-x-1">
+                                <span class="text-hokkaido-red text-xs">✓</span>
+                                <span>住宿訂房協助</span>
+                            </li>
+                            <li class="flex items-start space-x-1">
+                                <span class="text-hokkaido-red text-xs">✓</span>
+                                <span>交通票券代購</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-hokkaido-text mb-2">💝 方案</h3>
+                        <div class="space-y-2">
+                            <div class="p-2 bg-hokkaido-snow rounded text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">基礎諮詢</span>
+                                    <span class="text-hokkaido-red font-bold">免費</span>
+                                </div>
+                            </div>
+                            <div class="p-2 bg-hokkaido-snow rounded text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">詳細規劃</span>
+                                    <span class="text-hokkaido-red font-bold">NT$5,000</span>
+                                </div>
+                            </div>
+                            <div class="p-2 bg-hokkaido-snow rounded text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">全程陪同</span>
+                                    <span class="text-hokkaido-red font-bold">面議</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <button onclick="openInquiryForm()" 
+                            class="bg-hokkaido-red text-white py-3 px-4 rounded-md hover:bg-opacity-90 transition-colors font-bold text-sm w-full">
+                        開始規劃我的旅程 ✈️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Travel Resources Section -->
+        <div id="resources" class="mb-5">
+            <h2 class="text-base font-bold text-hokkaido-text mb-1 text-center">📚 旅行資源</h2>
+            <p class="text-center text-hokkaido-light mb-3 text-xs">多年累積的實用資訊，全部分享給你</p>
+            
+            <div class="space-y-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:space-y-0">
+                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-hokkaido-red">🏨</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text text-sm">推薦住宿清單</h3>
+                            <p class="text-xs text-hokkaido-light">精選日本優質旅館</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-hokkaido-red">🛍️</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text text-sm">購物指南</h3>
+                            <p class="text-xs text-hokkaido-light">血拚必買清單</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-hokkaido-red">💳</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text text-sm">旅遊信用卡</h3>
+                            <p class="text-xs text-hokkaido-light">最划算回饋卡</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-hokkaido-red">✈️</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text text-sm">交通攻略</h3>
+                            <p class="text-xs text-hokkaido-light">搶便宜秘密武器</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-hokkaido-red">📱</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text text-sm">實用APP</h3>
+                            <p class="text-xs text-hokkaido-light">旅行必備軟體</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-hokkaido-red">📧</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hokkaido-text text-sm">每週電子報</h3>
+                            <p class="text-xs text-hokkaido-light">最新資訊直送</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-hokkaido-light">
+            <div class="border-t border-hokkaido-light-red pt-3">
+                <p class="font-medium text-hokkaido-text mb-1 text-sm">與我聯繫</p>
+                <p class="text-xs mb-2">📧 hokkaido.meimei@email.com</p>
+                <p class="text-xs mb-2">📱 LINE: @hokkaido_meimei</p>
+                <p class="text-xs">© 2025 日本旅行企劃家の私藏清單 ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <script>
+        // Initialize Stripe - Key loaded from server environment
+        let stripe;
+        
+        // Load Stripe key from server
+        async function initializeStripe() {
+            try {
+                const response = await fetch('/api/stripe-key');
+                const { publishableKey } = await response.json();
+                stripe = Stripe(publishableKey);
+                console.log('✅ Stripe initialized successfully');
+            } catch (error) {
+                console.error('❌ Failed to initialize Stripe:', error);
+                alert('付款系統初始化失敗，請重新整理頁面或聯繫客服');
+            }
+        }
+
+        // Tiered pricing configuration (managed server-side)
+        console.log('🦑 魷魚酒壺套組 - 量購優惠系統已啟動');
+
+
+
+                // ============================================================================
+        // 🛒 UNIVERSAL PURCHASE FUNCTION - WORKS FOR ALL PRODUCTS
+        // ============================================================================
+        async function buyProduct(productId, quantity = 1) {
+            try {
+                // Ensure Stripe is initialized
+                if (!stripe) {
+                    console.log('🔄 Stripe not ready, initializing...');
+                    await initializeStripe();
+                    if (!stripe) {
+                        throw new Error('Stripe initialization failed');
+                    }
+                }
+
+                // Show loading state
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '<span class="animate-pulse">處理中...</span>';
+                button.disabled = true;
+
+                console.log(`🛒 Starting checkout: ${productId} x ${quantity}`);
+
+                // Create checkout session
+                const response = await fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productId, quantity })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const session = await response.json();
+
+                if (session.error) {
+                    throw new Error(session.error);
+                }
+
+                if (!session.id) {
+                    throw new Error('No session ID received from server');
+                }
+
+                // Redirect to Stripe Checkout
+                console.log('🔄 Redirecting to Stripe checkout...');
+                const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+                if (result.error) {
+                    throw new Error(result.error.message);
+                }
+
+            } catch (error) {
+                console.error('❌ Checkout error:', error);
+                alert('付款處理出現問題，請稍後再試或聯繫客服！\n客服信箱: hokkaido.meimei@email.com');
+                
+                // Reset button state
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        }
+
+        // Backward compatibility aliases
+        const buyWithQuantity = buyProduct;
+        const buySimpleProduct = buyProduct;
+
+
+
+        // ============================================================================
+        // 🎯 UNIVERSAL QUANTITY SELECTION - WORKS FOR ALL PRODUCTS
+        // ============================================================================
+        
+        // Show quantity options for any product
+        async function showQuantityOptions(productId = 'squid-sake-set') {
+            const prefix = productId === 'squid-sake-set' ? '' : 'new-product-';
+            const optionsDiv = document.getElementById(prefix + 'quantity-options');
+            const buttonsDiv = document.getElementById(prefix + 'pricing-buttons');
+            
+            optionsDiv.classList.remove('hidden');
+            
+            try {
+                console.log(`📊 Loading quantity options for ${productId}...`);
+                const response = await fetch(`/get-pricing-options/${productId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const pricingOptions = await response.json();
+                buttonsDiv.innerHTML = '';
+                
+                pricingOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.onclick = () => buyProduct(productId, option.quantity);
+                    
+                    // Subtle, low-key colors for all buttons
+                    const colorClass = option.quantity >= 5 
+                        ? 'bg-gray-600 hover:bg-gray-700 border border-hokkaido-red'
+                        : 'bg-gray-500 hover:bg-gray-600 border border-gray-300';
+                    
+                    button.className = `${colorClass} text-white py-3 px-2 rounded-lg text-xs font-medium transition-all duration-200 shadow-md`;
+                    button.innerHTML = `
+                        <div class="font-bold">${option.quantity}個</div>
+                        <div class="text-xs opacity-90">@NT$${option.unitPrice}</div>
+                        <div class="font-bold text-sm">NT$${option.totalPrice.toLocaleString()}</div>
+                    `;
+                    
+                    buttonsDiv.appendChild(button);
+                });
+                
+            } catch (error) {
+                console.error('❌ Error loading quantity options:', error);
+                buttonsDiv.innerHTML = '<div class="col-span-2 text-center text-xs text-red-500">載入失敗，請重試</div>';
+            }
+        }
+
+        // Hide quantity options for any product
+        function hideQuantityOptions(productId = 'squid-sake-set') {
+            const prefix = productId === 'squid-sake-set' ? '' : 'new-product-';
+            const optionsDiv = document.getElementById(prefix + 'quantity-options');
+            const buttonsDiv = document.getElementById(prefix + 'pricing-buttons');
+            const quantityInput = document.getElementById(prefix + 'custom-quantity');
+            const priceDisplay = document.getElementById(prefix + 'custom-price-display');
+            
+            optionsDiv.classList.add('hidden');
+            buttonsDiv.innerHTML = '<div class="col-span-2 text-center text-xs text-gray-500 py-2">載入中...</div>';
+            quantityInput.value = 1;
+            
+            // Reset to default price based on product
+            const defaultPrice = productId === 'squid-sake-set' ? 'NT$750' : 'NT$400';
+            priceDisplay.textContent = defaultPrice;
+        }
+
+        // Buy custom quantity for any product
+        async function buyCustomQuantity(productId = 'squid-sake-set') {
+            const prefix = productId === 'squid-sake-set' ? '' : 'new-product-';
+            const quantity = parseInt(document.getElementById(prefix + 'custom-quantity').value) || 1;
+            
+            if (quantity < 1 || quantity > 999) {
+                alert('數量必須在 1-999 之間');
+                return;
+            }
+            
+            await buyProduct(productId, quantity);
+        }
+
+        // Update custom price display for any product
+        async function updateCustomPrice(productId = 'squid-sake-set') {
+            const prefix = productId === 'squid-sake-set' ? '' : 'new-product-';
+            const quantity = parseInt(document.getElementById(prefix + 'custom-quantity').value) || 1;
+            const priceDisplay = document.getElementById(prefix + 'custom-price-display');
+            
+            if (quantity < 1 || quantity > 999) {
+                priceDisplay.textContent = 'NT$-';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/get-pricing/${productId}/${quantity}`);
+                if (response.ok) {
+                    const pricing = await response.json();
+                    priceDisplay.textContent = `NT$${pricing.totalPrice.toLocaleString()}`;
+                }
+            } catch (error) {
+                console.error('❌ Error updating price:', error);
+            }
+        }
+
+        // Backward compatibility - specific product functions
+        const showNewProductQuantityOptions = () => showQuantityOptions('new-product');
+        const hideNewProductQuantityOptions = () => hideQuantityOptions('new-product');
+        const buyNewProductCustomQuantity = () => buyCustomQuantity('new-product');
+        const updateNewProductCustomPrice = () => updateCustomPrice('new-product');
+
+
+
+
+
+
+
+        // Open booking forms
+        function openBookingForm(type) {
+            const formUrls = {
+                'cherry-blossom': 'https://forms.google.com/your-cherry-blossom-form',
+                'hokkaido-winter': 'https://forms.google.com/your-hokkaido-winter-form',
+                'sake-cups': 'https://forms.google.com/your-sake-cups-booking-form'
+            };
+            window.open(formUrls[type] || 'https://forms.google.com', '_blank');
+        }
+
+        // Open inquiry form
+        function openInquiryForm() {
+            window.open('https://forms.google.com/your-travel-inquiry-form', '_blank');
+        }
+
+        // ============================================================================
+        // 📊 UNIVERSAL PRICING DISPLAY LOADER
+        // ============================================================================
+        async function loadPricingDisplay(productId) {
+            const elementId = productId === 'squid-sake-set' ? 'tiered-pricing-display' : 'new-product-pricing-display';
+            const fallbackText = productId === 'squid-sake-set' ? 'NT$750→NT$550' : 'NT$400→NT$350';
+            
+            try {
+                const [pricing1, pricing5] = await Promise.all([
+                    fetch(`/get-pricing/${productId}/1`).then(r => r.json()),
+                    fetch(`/get-pricing/${productId}/5`).then(r => r.json())
+                ]);
+                
+                const displayElement = document.getElementById(elementId);
+                displayElement.textContent = `NT$${pricing1.unitPrice}→NT$${pricing5.unitPrice}`;
+                
+            } catch (error) {
+                console.error(`❌ Error loading pricing display for ${productId}:`, error);
+                document.getElementById(elementId).textContent = fallbackText;
+            }
+        }
+
+        // Backward compatibility
+        const loadTieredPricingDisplay = () => loadPricingDisplay('squid-sake-set');
+        const loadNewProductTieredPricingDisplay = () => loadPricingDisplay('new-product');
+
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Stripe first
+            initializeStripe();
+            
+            // Load dynamic pricing for both products
+            loadTieredPricingDisplay();
+            loadNewProductTieredPricingDisplay();
+            
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Add loading animations
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Add special attention to the featured product
+            const featuredProduct = document.querySelector('#products .border-2');
+            if (featuredProduct) {
+                setTimeout(() => {
+                    featuredProduct.classList.add('animate-pulse');
+                    setTimeout(() => {
+                        featuredProduct.classList.remove('animate-pulse');
+                    }, 2000);
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
