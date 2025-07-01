@@ -217,23 +217,27 @@ app.post('/create-checkout-session', async (req, res) => {
         
         console.log(`Creating checkout session: ${product.name} - ${quantity} items at NT$${pricing.pricePerUnit} each`);
 
+        // Get the proper origin URL with fallback
+        const origin = req.headers.origin || req.headers.host || 'http://localhost:3000';
+        const baseUrl = origin.startsWith('http') ? origin : `http://${origin}`;
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
                 {
                     price_data: {
                         currency: 'twd',
-                        product: product.stripe_id,
+                        product: product.stripe_id, // Use your actual Stripe product ID
                         unit_amount: pricing.unitPrice,
                     },
                     quantity: quantity,
                 }
             ],
             mode: 'payment',
-            success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/cancel.html`,
+            success_url: `${baseUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${baseUrl}/cancel.html`,
             shipping_address_collection: {
-                allowed_countries: ['JP', 'TW', 'US', 'CA'],
+                allowed_countries: ['TW', 'JP'],
             },
             custom_fields: [
                 {
@@ -273,6 +277,47 @@ app.get('/checkout-session/:sessionId', async (req, res) => {
     } catch (error) {
         console.error('Error retrieving session:', error);
         res.status(500).json({ error: error.message });
+    }
+});
+
+// Test endpoint with minimal Stripe checkout session
+app.post('/test-payment', async (req, res) => {
+    try {
+        console.log('🧪 Testing minimal checkout session...');
+        
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'twd',
+                        product_data: {
+                            name: 'Test Product',
+                        },
+                        unit_amount: 50000, // NT$500
+                    },
+                    quantity: 1,
+                }
+            ],
+            mode: 'payment',
+            success_url: 'http://localhost:3000/success.html',
+            cancel_url: 'http://localhost:3000/cancel.html',
+        });
+
+        console.log(`✅ Test session created: ${session.id}`);
+        res.json({ 
+            success: true,
+            session_id: session.id,
+            message: 'Test payment session created successfully!' 
+        });
+        
+    } catch (error) {
+        console.error('❌ Test payment error:', error.message);
+        res.status(500).json({ 
+            success: false,
+            error: error.message,
+            type: error.type || 'unknown_error'
+        });
     }
 });
 
