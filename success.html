@@ -42,6 +42,13 @@
             70% { transform: scale(0.9); }
             100% { transform: scale(1); opacity: 1; }
         }
+        /* Ensure numbers display straight and clear */
+        .amount-display {
+            font-family: 'Noto Sans TC', monospace, sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body class="bg-hokkaido-cream min-h-screen flex items-center justify-center">
@@ -71,11 +78,11 @@
                     <ul class="space-y-2 text-xs text-hokkaido-light">
                         <li class="flex items-start space-x-2">
                             <span class="text-hokkaido-red">📧</span>
-                            <span>您將收到訂單確認信件</span>
+                            <span>出貨時我會發送通知信件給您</span>
                         </li>
                         <li class="flex items-start space-x-2">
                             <span class="text-hokkaido-red">📦</span>
-                            <span>我們會在3-5個工作天內安排出貨</span>
+                            <span>我會在3-5個工作天內安排出貨</span>
                         </li>
                         <li class="flex items-start space-x-2">
                             <span class="text-hokkaido-red">🚚</span>
@@ -83,7 +90,7 @@
                         </li>
                         <li class="flex items-start space-x-2">
                             <span class="text-hokkaido-red">💬</span>
-                            <span>有問題隨時聯繫我們</span>
+                            <span>有問題隨時聯繫我</span>
                         </li>
                     </ul>
                 </div>
@@ -122,7 +129,7 @@
                     orderDetails.innerHTML = `
                         <div class="space-y-1">
                             <p><strong>訂單編號:</strong> ${session.id}</p>
-                            <p><strong>金額:</strong> ¥${(session.amount_total / 100).toLocaleString()}</p>
+                            <p><strong>金額:</strong> <span class="amount-display">¥${(session.amount_total / 100).toLocaleString()}</span></p>
                             <p><strong>付款時間:</strong> ${new Date().toLocaleString('zh-TW')}</p>
                         </div>
                     `;
