@@ -218,8 +218,8 @@ app.post('/create-checkout-session', async (req, res) => {
         console.log(`Creating checkout session: ${product.name} - ${quantity} items at NT$${pricing.pricePerUnit} each`);
 
         // Get the proper origin URL with fallback
-        const origin = req.headers.origin || req.headers.host || 'http://localhost:3000';
-        const baseUrl = origin.startsWith('http') ? origin : `http://${origin}`;
+        const origin = req.headers.origin || req.headers.host || 'https://web-hokkaido-meimei.vercel.app';
+        const baseUrl = origin.startsWith('http') ? origin : `https://${origin}`;
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -396,13 +396,20 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
 // ============================================================================
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`🌐 Visit http://localhost:${PORT} to view your site`);
-    console.log(`📦 Loaded ${Object.keys(PRODUCTS).length} products`);
-    
-    // Show loaded products
-    Object.entries(PRODUCTS).forEach(([id, product]) => {
-        console.log(`   • ${product.name} (${id})`);
+
+// For local development
+if (process.env.NODE_ENV !== 'production' && require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`🚀 Server running on port ${PORT}`);
+        console.log(`🌐 Visit http://localhost:${PORT} to view your site`);
+        console.log(`📦 Loaded ${Object.keys(PRODUCTS).length} products`);
+        
+        // Show loaded products
+        Object.entries(PRODUCTS).forEach(([id, product]) => {
+            console.log(`   • ${product.name} (${id})`);
+        });
     });
-}); 
+}
+
+// Export for Vercel
+module.exports = app; 
