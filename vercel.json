@@ -4,11 +4,43 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/create-checkout-session",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/get-pricing/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/list-products",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/test-payment",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/checkout-session/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|svg|ico))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/",
       "dest": "/server.js"
     }
   ]
