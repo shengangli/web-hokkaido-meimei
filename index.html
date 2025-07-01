@@ -615,16 +615,28 @@
             const buttonsDiv = document.getElementById(prefix + 'pricing-buttons');
             
             optionsDiv.classList.remove('hidden');
+            buttonsDiv.innerHTML = '<div class="col-span-2 text-center text-xs text-gray-500 py-2">載入中...</div>';
             
             try {
                 console.log(`📊 Loading quantity options for ${productId}...`);
-                const response = await fetch(`/get-pricing-options/${productId}`);
+                
+                // Add a small delay to ensure server is ready
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                const response = await fetch(`/get-pricing-options/${productId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
                 const pricingOptions = await response.json();
+                console.log(`✅ Received ${pricingOptions.length} pricing options for ${productId}`);
+                
                 buttonsDiv.innerHTML = '';
                 
                 pricingOptions.forEach(option => {
@@ -648,7 +660,42 @@
                 
             } catch (error) {
                 console.error('❌ Error loading quantity options:', error);
-                buttonsDiv.innerHTML = '<div class="col-span-2 text-center text-xs text-red-500">載入失敗，請重試</div>';
+                
+                // Fallback: Create manual buttons with hardcoded pricing
+                const fallbackOptions = productId === 'squid-sake-set' 
+                    ? [
+                        { quantity: 1, unitPrice: 750, totalPrice: 750 },
+                        { quantity: 2, unitPrice: 660, totalPrice: 1320 },
+                        { quantity: 5, unitPrice: 550, totalPrice: 2750 },
+                        { quantity: 10, unitPrice: 550, totalPrice: 5500 }
+                    ]
+                    : [
+                        { quantity: 1, unitPrice: 400, totalPrice: 400 },
+                        { quantity: 2, unitPrice: 400, totalPrice: 800 },
+                        { quantity: 5, unitPrice: 350, totalPrice: 1750 },
+                        { quantity: 10, unitPrice: 350, totalPrice: 3500 }
+                    ];
+                
+                buttonsDiv.innerHTML = '';
+                fallbackOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.onclick = () => buyProduct(productId, option.quantity);
+                    
+                    const colorClass = option.quantity >= 5 
+                        ? 'bg-gray-600 hover:bg-gray-700 border border-hokkaido-red'
+                        : 'bg-gray-500 hover:bg-gray-600 border border-gray-300';
+                    
+                    button.className = `${colorClass} text-white py-3 px-2 rounded-lg text-xs font-medium transition-all duration-200 shadow-md`;
+                    button.innerHTML = `
+                        <div class="font-bold">${option.quantity}個</div>
+                        <div class="text-xs opacity-90">@NT$${option.unitPrice}</div>
+                        <div class="font-bold text-sm">NT$${option.totalPrice.toLocaleString()}</div>
+                    `;
+                    
+                    buttonsDiv.appendChild(button);
+                });
+                
+                console.log(`🔄 Using fallback pricing for ${productId}`);
             }
         }
 
