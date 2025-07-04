@@ -237,7 +237,7 @@ app.post('/create-checkout-session', async (req, res) => {
             success_url: `${baseUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${baseUrl}/cancel.html`,
             shipping_address_collection: {
-                allowed_countries: ['TW', 'JP'],
+                allowed_countries: ['TW', 'JP','HK','CN'],
             },
             custom_fields: [
                 {
