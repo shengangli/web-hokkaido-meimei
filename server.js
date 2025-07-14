@@ -49,6 +49,28 @@ const PRODUCTS = {
         
         // Frontend Display Options
         quantity_options: [1, 2, 3, 4, 5, 10] // Available quick-select quantities
+    },
+    
+    'tosa-banquet-cup': {
+        // Stripe Configuration
+        stripe_id: 'prod_Sg94KTCgj8JXd5', // You'll need to create this product in Stripe Dashboard
+        
+        // Display Information
+        name: '🍶 高知傳統酒席神器｜土佐宴會杯',
+        description: '無法擱置的酒杯，倒酒後不能放桌，只能豪爽喝下去！',
+        
+        // Pricing Configuration
+        pricing_type: 'tiered',
+        tiers: [
+            { up_to: 2, unit_amount: 256000 },    
+            { up_to: 3, unit_amount: 380000 },    
+            { up_to: 'inf', unit_amount: 126000 } 
+        ],
+        
+        // Frontend Display Options
+        quantity_options: [1, 2, 3, 4, 5, 10] // Available quick-select quantities
+    
+    
     }
     
     // 📝 TO ADD NEW PRODUCTS:
