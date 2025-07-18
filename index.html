@@ -351,8 +351,8 @@
                         <!-- Price Display -->
                         <div class="bg-orange-100 p-3 rounded-lg mb-3">
                             <div class="text-center">
-                                <p id="tosa-banquet-cup-pricing-display" class="text-xl font-bold text-hokkaido-red">NT$1,280→NT$1,267</p>
-                                <p class="text-xs text-hokkaido-text">動態優惠計價 • 買越多省越多</p>
+                                <p id="tosa-banquet-cup-pricing-display" class="text-xl font-bold text-hokkaido-red">NT$1,450</p>
+                                <p class="text-xs text-hokkaido-text">🔥 現貨特價 NT$1,450｜工藝師限量製作</p>
                             </div>
                         </div>
                     </div>
@@ -399,7 +399,7 @@
                                 </button>
                             </div>
                             <div class="text-center mt-2">
-                                <span id="tosa-banquet-cup-custom-price-display" class="text-sm font-bold text-hokkaido-red bg-orange-100 px-2 py-1 rounded">NT$1,280</span>
+                                <span id="tosa-banquet-cup-custom-price-display" class="text-sm font-bold text-hokkaido-red bg-orange-100 px-2 py-1 rounded">NT$1,450</span>
                             </div>
                         </div>
                         
@@ -412,13 +412,12 @@
             </div>
 
         
-        <!-- Available Tours Section -->
+        <!-- Available Tours Section; Hide for Now -->
+        <!--
         <div id="tours" class="mb-5">
             <h2 class="text-base font-bold text-hokkaido-text mb-1 text-center">🗾 日本旅行設計</h2>
             <p class="text-center text-hokkaido-light mb-3 text-xs">專為你設計的深度行程</p>
-            
             <div class="space-y-3">
-                <!-- 北陸團特別企劃 -->
                 <div class="bg-white border border-hokkaido-light-red rounded-lg p-3 card-hover">
                     <div class="flex justify-between items-start mb-2">
                         <div class="flex-1">
@@ -438,8 +437,6 @@
                         立即預約 🌸
                     </button>
                 </div>
-
-                <!-- 北海道冬季限定 -->
                 <div class="bg-white border border-hokkaido-light-red rounded-lg p-3 card-hover">
                     <div class="flex justify-between items-start mb-2">
                         <div class="flex-1">
@@ -461,6 +458,7 @@
                 </div>
             </div>
         </div>
+        --> 
 
         <!-- Travel Inquiry Section -->
         <div id="inquiry" class="mb-5">
@@ -770,19 +768,26 @@
                 console.error('❌ Error loading quantity options:', error);
                 
                 // Fallback: Create manual buttons with hardcoded pricing
-                const fallbackOptions = productId === 'squid-sake-set' 
-                    ? [
+                const fallbackOptions = {
+                    'squid-sake-set': [
                         { quantity: 1, unitPrice: 750, totalPrice: 750 },
                         { quantity: 2, unitPrice: 660, totalPrice: 1320 },
                         { quantity: 5, unitPrice: 550, totalPrice: 2750 },
                         { quantity: 10, unitPrice: 550, totalPrice: 5500 }
-                    ]
-                    : [
+                    ],
+                    'new-product': [
                         { quantity: 1, unitPrice: 400, totalPrice: 400 },
                         { quantity: 2, unitPrice: 400, totalPrice: 800 },
                         { quantity: 5, unitPrice: 350, totalPrice: 1750 },
                         { quantity: 10, unitPrice: 350, totalPrice: 3500 }
-                    ];
+                    ],
+                    'tosa-banquet-cup': [
+                        { quantity: 1, unitPrice: 1450, totalPrice: 1450 },
+                        { quantity: 2, unitPrice: 1450, totalPrice: 2900 },
+                        { quantity: 5, unitPrice: 1450, totalPrice: 7250 },
+                        { quantity: 10, unitPrice: 1450, totalPrice: 14500 }
+                    ]
+                }[productId] || [];
                 
                 buttonsDiv.innerHTML = '';
                 fallbackOptions.forEach(option => {
@@ -829,7 +834,7 @@
             const defaultPrices = {
                 'squid-sake-set': 'NT$750',
                 'new-product': 'NT$400',
-                'tosa-banquet-cup': 'NT$1,280'
+                'tosa-banquet-cup': 'NT$1,450'
             };
             const defaultPrice = defaultPrices[productId] || 'NT$0';
             priceDisplay.textContent = defaultPrice;
@@ -901,17 +906,32 @@
         // 📊 UNIVERSAL PRICING DISPLAY LOADER
         // ============================================================================
         async function loadPricingDisplay(productId) {
-            const elementId = productId === 'squid-sake-set' ? 'tiered-pricing-display' : 'new-product-pricing-display';
-            const fallbackText = productId === 'squid-sake-set' ? 'NT$750→NT$550' : 'NT$400→NT$350';
+            const elementMapping = {
+                'squid-sake-set': 'tiered-pricing-display',
+                'new-product': 'new-product-pricing-display',
+                'tosa-banquet-cup': 'tosa-banquet-cup-pricing-display'
+            };
+            const fallbackMapping = {
+                'squid-sake-set': 'NT$750→NT$550',
+                'new-product': 'NT$400→NT$350',
+                'tosa-banquet-cup': 'NT$1,450'
+            };
+            
+            const elementId = elementMapping[productId];
+            const fallbackText = fallbackMapping[productId];
             
             try {
-                const [pricing1, pricing5] = await Promise.all([
-                    fetch(`/get-pricing/${productId}/1`).then(r => r.json()),
-                    fetch(`/get-pricing/${productId}/5`).then(r => r.json())
-                ]);
-                
+                const pricing1 = await fetch(`/get-pricing/${productId}/1`).then(r => r.json());
                 const displayElement = document.getElementById(elementId);
-                displayElement.textContent = `NT$${pricing1.unitPrice}→NT$${pricing5.unitPrice}`;
+                
+                if (productId === 'tosa-banquet-cup') {
+                    // Simple pricing - just show the fixed price
+                    displayElement.textContent = `NT$${pricing1.unitPrice.toLocaleString()}`;
+                } else {
+                    // Tiered pricing - show range
+                    const pricing5 = await fetch(`/get-pricing/${productId}/5`).then(r => r.json());
+                    displayElement.textContent = `NT$${pricing1.unitPrice}→NT$${pricing5.unitPrice}`;
+                }
                 
             } catch (error) {
                 console.error(`❌ Error loading pricing display for ${productId}:`, error);

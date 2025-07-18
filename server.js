@@ -60,17 +60,11 @@ const PRODUCTS = {
         description: '無法擱置的酒杯，倒酒後不能放桌，只能豪爽喝下去！',
         
         // Pricing Configuration
-        pricing_type: 'tiered',
-        tiers: [
-            { up_to: 2, unit_amount: 256000 },    
-            { up_to: 3, unit_amount: 380000 },    
-            { up_to: 'inf', unit_amount: 126000 } 
-        ],
+        pricing_type: 'simple',
+        price: 145000,                        // NT$1450 for all quantities
         
         // Frontend Display Options
         quantity_options: [1, 2, 3, 4, 5, 10] // Available quick-select quantities
-    
-    
     }
     
     // 📝 TO ADD NEW PRODUCTS:
