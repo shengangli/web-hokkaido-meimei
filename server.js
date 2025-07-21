@@ -12,8 +12,8 @@ app.use(express.static('.'));
 // ============================================================================
 const PRODUCTS = {
     'squid-sake-set': {
-        // Stripe Configuration
-        stripe_id: 'prod_Sa51z8ECdsm5U0',
+        // Stripe Configuration - UPDATE THIS WITH NEW PERSON'S PRODUCT ID
+        stripe_id: 'prod_NEW_PERSONS_SQUID_PRODUCT_ID', // Was: prod_Sa51z8ECdsm5U0
         
         // Display Information
         name: '🦑 魷魚酒壺套組',
@@ -33,8 +33,8 @@ const PRODUCTS = {
     },
     
     'new-product': {
-        // Stripe Configuration
-        stripe_id: 'prod_SaveAY7nQYrlxS',
+        // Stripe Configuration - UPDATE THIS WITH NEW PERSON'S PRODUCT ID
+        stripe_id: 'prod_NEW_PERSONS_PRODUCT_2_ID', // Was: prod_SaveAY7nQYrlxS
         
         // Display Information
         name: '🎌 日本特色商品',
@@ -52,8 +52,8 @@ const PRODUCTS = {
     },
     
     'tosa-banquet-cup': {
-        // Stripe Configuration
-        stripe_id: 'prod_Sg94KTCgj8JXd5', // You'll need to create this product in Stripe Dashboard
+        // Stripe Configuration - UPDATE THIS WITH NEW PERSON'S PRODUCT ID
+        stripe_id: 'prod_NEW_PERSONS_PRODUCT_3_ID', // Was: prod_Sg94KTCgj8JXd5
         
         // Display Information
         name: '🍶 高知傳統酒席神器｜土佐宴會杯',

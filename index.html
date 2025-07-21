@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
     ============================================================================
-    🎯 PRODUCT MANAGEMENT GUIDE - READ THIS BEFORE EDITING!
+    🎯 This is a website developed by Dustin Li
     ============================================================================
     
     TO ADD A NEW PRODUCT:
@@ -118,8 +118,7 @@
                 <div class="text-center mb-2">
                     <div class="text-sm font-bold">🍎 日本旅行企劃家</div>
                 </div>
-                <div class="grid grid-cols-4 gap-1 text-xs text-center">
-                    <a href="#tours" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">旅行設計</a>
+                <div class="grid grid-cols-3 gap-1 text-xs text-center">
                     <a href="#products" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">精選商品</a>
                     <a href="#inquiry" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">客製規劃</a>
                     <a href="#resources" class="bg-white/20 py-2 rounded text-black hover:bg-white/30 transition-colors">旅行資源</a>
@@ -500,7 +499,7 @@
                             <div class="p-2 bg-hokkaido-snow rounded text-xs">
                                 <div class="flex justify-between items-center">
                                     <span class="font-medium">詳細規劃</span>
-                                    <span class="text-hokkaido-red font-bold">NT$5,000</span>
+                                    <span class="text-hokkaido-red font-bold">方案確認前NT$0</span>
                                 </div>
                             </div>
                             <div class="p-2 bg-hokkaido-snow rounded text-xs">
@@ -527,6 +526,7 @@
             <p class="text-center text-hokkaido-light mb-3 text-xs">多年累積的實用資訊，全部分享給你</p>
             
             <div class="space-y-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:space-y-0">
+                
                 <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
@@ -539,6 +539,7 @@
                     </div>
                 </a>
 
+                <!--
                 <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
@@ -550,7 +551,7 @@
                         </div>
                     </div>
                 </a>
-
+                -->
                 <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
@@ -563,7 +564,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
+                <a href="#" onclick="openTransportationGuide()" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
                             <span class="text-hokkaido-red">✈️</span>
@@ -574,7 +575,7 @@
                         </div>
                     </div>
                 </a>
-
+                <!-- APP; Hide for Now
                 <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
@@ -586,7 +587,8 @@
                         </div>
                     </div>
                 </a>
-
+                -->
+                <!--Sub letter; Hide for Now
                 <a href="#" class="card-hover block p-3 bg-white rounded-lg border border-hokkaido-light-red">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 bg-hokkaido-light-red rounded-lg flex items-center justify-center flex-shrink-0">
@@ -596,6 +598,7 @@
                             <h3 class="font-semibold text-hokkaido-text text-sm">每週電子報</h3>
                             <p class="text-xs text-hokkaido-light">最新資訊直送</p>
                         </div>
+                    -->
                     </div>
                 </a>
             </div>
@@ -604,9 +607,11 @@
         <!-- Footer -->
         <div class="text-center text-hokkaido-light">
             <div class="border-t border-hokkaido-light-red pt-3">
-                <p class="font-medium text-hokkaido-text mb-1 text-sm">與我聯繫</p>
+                <p class="font-medium text-hokkaido-text mb-1 text-sm">About me</p>
+                <!--
                 <p class="text-xs mb-2">📧 hokkaido.meimei@email.com</p>
                 <p class="text-xs mb-2">📱 LINE: @hokkaido_meimei</p>
+                -->
                 <p class="text-xs">© 2025 日本旅行企劃家の私藏清單 ❤️</p>
             </div>
         </div>
@@ -690,7 +695,7 @@
 
             } catch (error) {
                 console.error('❌ Checkout error:', error);
-                alert('付款處理出現問題，請稍後再試或聯繫客服！\n客服信箱: hokkaido.meimei@email.com');
+                alert('付款處理出現問題，請稍後再試');
                 
                 // Reset button state
                 button.innerHTML = originalText;
@@ -899,7 +904,12 @@
 
         // Open inquiry form
         function openInquiryForm() {
-            window.open('https://forms.google.com/your-travel-inquiry-form', '_blank');
+            window.open('https://docs.google.com/forms/d/e/1FAIpQLSd24r6gv_p73GBtzsbCobRkOodtH43KOjH7JTzQtVS0a89pSA/viewform?usp=send_form', '_blank');
+        }
+
+        // Open transportation guide
+        function openTransportationGuide() {
+            window.open('https://www.instagram.com/p/DKuGqZrT1vo/');
         }
 
         // ============================================================================
