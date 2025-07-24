@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | 日本旅行企劃家の私藏清單</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hokkaido-red': '#E53E3E',
+                        'hokkaido-light-red': '#FED7D7',
+                        'hokkaido-pink': '#FBB6CE',
+                        'hokkaido-cream': '#FFFAF0',
+                        'hokkaido-snow': '#F7FAFC',
+                        'hokkaido-text': '#2D3748',
+                        'hokkaido-light': '#718096'
+                    },
+                    fontFamily: {
+                        'chinese': ['Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+        .hokkaido-gradient {
+            background: linear-gradient(135deg, #E53E3E 0%, #FC8181 50%, #FBB6CE 100%);
+        }
+    </style>
+</head>
+<body class="bg-hokkaido-cream min-h-screen">
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-2xl p-8 shadow-xl border border-hokkaido-light-red">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-hokkaido-text mb-2">お問い合わせ</h1>
+                <p class="text-hokkaido-light text-sm">Contact Us</p>
+                <p class="text-hokkaido-light text-xs mt-2">お気軽にお問い合わせください</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                    <div class="text-center mb-4">
+                        <h2 class="text-xl font-bold text-hokkaido-text mb-2">📧 メールでのお問い合わせ</h2>
+                        <p class="text-hokkaido-light text-sm">商品やサービスに関するご質問はこちらまで</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border text-center">
+                        <p class="text-2xl font-bold text-hokkaido-red mb-2">miyabisapporo@gmail.com</p>
+                        <p class="text-hokkaido-light text-sm">営業時間：平日 9:00-18:00</p>
+                        <p class="text-hokkaido-light text-xs">土日祝日はお休みをいただいております</p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="mailto:miyabisapporo@gmail.com" 
+                           class="block w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium text-center">
+                            メールを送信する 📧
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-hokkaido-snow p-6 rounded-lg">
+                    <h2 class="font-bold text-hokkaido-text mb-4 text-center">📋 よくあるお問い合わせ</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg border border-hokkaido-light-red">
+                            <h3 class="font-semibold text-hokkaido-text mb-2">🚚 配送について</h3>
+                            <p class="text-hokkaido-light text-sm">決済完了後、3-5営業日以内に発送いたします。配送状況は追跡番号でご確認いただけます。</p>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-hokkaido-light-red">
+                            <h3 class="font-semibold text-hokkaido-text mb-2">💳 お支払いについて</h3>
+                            <p class="text-hokkaido-light text-sm">クレジットカード決済（Visa, Mastercard, American Express等）をご利用いただけます。</p>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-hokkaido-light-red">
+                            <h3 class="font-semibold text-hokkaido-text mb-2">📦 商品について</h3>
+                            <p class="text-hokkaido-light text-sm">北海道の職人が手作りした伝統工芸品です。一つ一つ丁寧に検品してお送りします。</p>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-hokkaido-light-red">
+                            <h3 class="font-semibold text-hokkaido-text mb-2">↩️ 返品・交換について</h3>
+                            <p class="text-hokkaido-light text-sm">商品の性質上、原則として返品・交換はお受けできません。商品に瑕疵がある場合のみ対応いたします。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                    <h2 class="font-bold text-hokkaido-text mb-4 text-center">🏢 事業者情報</h2>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="font-semibold text-hokkaido-text">事業者名</p>
+                                <p class="text-hokkaido-light">日本旅行企劃家の私藏清單</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-hokkaido-text">運営責任者</p>
+                                <p class="text-hokkaido-light">Mei</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-hokkaido-text">所在地</p>
+                                <p class="text-hokkaido-light">北海道札幌市</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-hokkaido-text">メール</p>
+                                <p class="text-hokkaido-light">miyabisapporo@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                    <h2 class="font-bold text-hokkaido-text mb-4 text-center">⏰ 返信までの目安</h2>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-green-600 text-xl">📧</span>
+                            <div>
+                                <p class="font-semibold text-hokkaido-text text-sm">一般的なお問い合わせ</p>
+                                <p class="text-hokkaido-light text-xs">1-2営業日以内にご返信</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-orange-600 text-xl">🚨</span>
+                            <div>
+                                <p class="font-semibold text-hokkaido-text text-sm">緊急のお問い合わせ</p>
+                                <p class="text-hokkaido-light text-xs">24時間以内にご返信</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-blue-600 text-xl">📋</span>
+                            <div>
+                                <p class="font-semibold text-hokkaido-text text-sm">カスタム旅行企画</p>
+                                <p class="text-hokkaido-light text-xs">2-3営業日以内にご提案</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-white rounded border">
+                        <p class="text-hokkaido-light text-xs">
+                            <strong>※</strong> 土日祝日はお休みをいただいております。金曜日午後以降のお問い合わせは、翌営業日の対応となる場合があります。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="/" class="inline-block bg-hokkaido-red text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors font-medium">
+                    ホームに戻る
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-hokkaido-light mt-8">
+            <div class="border-t border-hokkaido-light-red pt-4">
+                <div class="flex justify-center space-x-4 text-xs mb-2">
+                    <a href="/tokusho.html" class="hover:text-hokkaido-red">特定商取引法</a>
+                    <a href="/privacy.html" class="hover:text-hokkaido-red">プライバシーポリシー</a>
+                    <a href="/terms.html" class="hover:text-hokkaido-red">利用規約</a>
+                    <a href="/refund.html" class="hover:text-hokkaido-red">返金ポリシー</a>
+                    <a href="/contact.html" class="hover:text-hokkaido-red">お問い合わせ</a>
+                </div>
+                <div class="flex justify-center space-x-4 text-xs mb-2">
+                    <a href="/tokusho-zh.html" class="hover:text-hokkaido-red">特定商業交易法</a>
+                    <a href="/privacy-zh.html" class="hover:text-hokkaido-red">隱私政策</a>
+                    <a href="/terms-zh.html" class="hover:text-hokkaido-red">使用條款</a>
+                    <a href="/refund-zh.html" class="hover:text-hokkaido-red">退款政策</a>
+                    <a href="/contact-zh.html" class="hover:text-hokkaido-red">聯絡我們</a>
+                </div>
+                <p class="text-xs">© 2025 日本旅行企劃家の私藏清單 ❤️</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
