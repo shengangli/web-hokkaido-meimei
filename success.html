@@ -157,7 +157,7 @@
                     const orderDetails = document.getElementById('order-details');
                     orderDetails.innerHTML = `
                         <div class="space-y-1">
-                            <p><strong>訂單編號:</strong> ${session.id}</p>
+                            <p><strong>訂單編號:</strong><br><span class="text-xs font-mono break-all">${session.id}</span></p>
                             <p><strong>金額:</strong> <span class="amount-display">¥${(session.amount_total / 100).toLocaleString()}</span></p>
                             <p><strong>付款時間:</strong> ${new Date().toLocaleString('zh-TW')}</p>
                         </div>
@@ -166,8 +166,8 @@
                 .catch(error => {
                     console.error('Error fetching session details:', error);
                     document.getElementById('order-details').innerHTML = `
-                        <p>訂單編號: ${sessionId}</p>
-                        <p>付款完成時間: ${new Date().toLocaleString('zh-TW')}</p>
+                        <p><strong>訂單編號:</strong><br><span class="text-xs font-mono break-all">${sessionId}</span></p>
+                        <p><strong>付款完成時間:</strong> ${new Date().toLocaleString('zh-TW')}</p>
                     `;
                 });
         } else {
