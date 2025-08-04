@@ -1,0 +1,76 @@
+{
+  "business": {
+    "name": {
+      "japanese": "日本旅行企劃家の私藏清單",
+      "english": "Japan Travel Planner's Secret List",
+      "brand": "hokkaido_meimei",
+      "short": "Mei"
+    },
+    "contact": {
+      "email": "miyabisapporo@gmail.com",
+      "businessHours": {
+        "japanese": "平日 9:00-18:00",
+        "chinese": "平日 9:00-18:00"
+      },
+      "offDays": {
+        "japanese": "土日祝日はお休みをいただいております",
+        "chinese": "週末及國定假日休息"
+      }
+    },
+    "location": {
+      "japanese": "北海道札幌市",
+      "chinese": "日本北海道札幌市",
+      "full": "[住所（都道府県＋市区町村＋番地）]"
+    },
+    "responsible": {
+      "japanese": "hokkaido_meimei",
+      "chinese": "Mei"
+    },
+    "legal": {
+      "lastUpdated": "2025年1月1日",
+      "copyright": "© 2025 日本旅行企劃家の私藏清單 ❤️"
+    },
+    "policies": {
+      "shipping": {
+        "japanese": "決済完了後3-5営業日以内に発送",
+        "chinese": "付款完成後3-5個工作天內出貨"
+      },
+      "returnPolicy": {
+        "japanese": "商品の性質上、原則として返品・返金はお受けしておりません。不良品や商品違いがあった場合は、商品到着後7日以内にご連絡ください。",
+        "chinese": "因商品性質，原則上不接受退貨退款。如有不良品或商品錯誤，請於商品到貨後7天內聯繫我們。"
+      },
+      "paymentMethods": {
+        "japanese": "クレジットカード（Stripe）",
+        "chinese": "信用卡（Stripe）"
+      }
+    },
+    "responseTime": {
+      "general": {
+        "japanese": "1-2営業日以内にご返信",
+        "chinese": "1-2個工作天內回覆"
+      },
+      "urgent": {
+        "japanese": "24時間以内にご返信", 
+        "chinese": "24小時內回覆"
+      },
+      "planning": {
+        "japanese": "2-3営業日以内にご提案",
+        "chinese": "2-3個工作天內提供方案"
+      }
+    }
+  },
+  "theme": {
+    "colors": {
+      "primary": "#E53E3E",
+      "lightRed": "#FED7D7", 
+      "pink": "#FBB6CE",
+      "cream": "#FFFAF0",
+      "snow": "#F7FAFC",
+      "text": "#2D3748",
+      "light": "#718096"
+    },
+    "fonts": {
+      "chinese": ["Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "sans-serif"]
+    }
+  }
+} 

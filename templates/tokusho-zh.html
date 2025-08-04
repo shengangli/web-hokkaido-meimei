@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>特定商業交易法標示 | 日本旅行企劃家の私藏清單</title>
+    <title>特定商業交易法標示 | {{BUSINESS_NAME_JAPANESE}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -46,28 +46,28 @@
             <div class="space-y-4 text-sm">
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">販售業者</h2>
-                    <p class="text-hokkaido-light">Hsu Yamei</p>
+                    <p class="text-hokkaido-light">{{RESPONSIBLE_CHINESE}}（{{BUSINESS_NAME_JAPANESE}}）</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">營運統籌負責人</h2>
-                    <p class="text-hokkaido-light">Hsu Yamei</p>
+                    <p class="text-hokkaido-light">{{RESPONSIBLE_CHINESE}}</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">所在地</h2>
-                    <p class="text-hokkaido-light">北海道札幌市中央区南十条</p>
+                    <p class="text-hokkaido-light">{{LOCATION_FULL}}</p>
                     <p class="text-xs text-hokkaido-light mt-1">※詳細地址請聯繫我們詢問</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">電話號碼</h2>
-                    <p class="text-hokkaido-light">📞 070-4340-1663</p>
+                    <p class="text-hokkaido-light">[請以電子郵件聯繫我們]</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">電子郵件地址</h2>
-                    <p class="text-hokkaido-light">📧 ninety840331@gmail.com</p>
+                    <p class="text-hokkaido-light">📧 {{CONTACT_EMAIL}}</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
@@ -77,25 +77,27 @@
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">商品價格以外的必要費用</h2>
-                    <p class="text-hokkaido-light">無（含運費）</p>
+                    <p class="text-hokkaido-light">運費、轉帳手續費等（如適用）</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">交付時期</h2>
-                    <p class="text-hokkaido-light">確認入款後3-14個工作天內出貨</p>
-                    <p class="text-xs text-hokkaido-light mt-1">※各商品頁面標示</p>
-
+                    <p class="text-hokkaido-light">確認入款後3-5個工作天內出貨</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">付款方式</h2>
-                    <p class="text-hokkaido-light">信用卡（Stripe）</p>
+                    <p class="text-hokkaido-light">{{PAYMENT_METHODS_ZH}}</p>
+                </div>
+
+                <div class="bg-hokkaido-snow p-4 rounded-lg">
+                    <h2 class="font-bold text-hokkaido-text mb-2">付款期限</h2>
+                    <p class="text-hokkaido-light">訂購後7天內請完成付款</p>
                 </div>
 
                 <div class="bg-hokkaido-snow p-4 rounded-lg">
                     <h2 class="font-bold text-hokkaido-text mb-2">退貨・取消相關</h2>
-                    <p class="text-hokkaido-light">因商品性質，原則上不接受退貨退款。</p>
-                    <p class="text-hokkaido-light">如有不良品或商品錯誤，請於商品到貨後7天內聯繫我們。</p>
+                    <p class="text-hokkaido-light">{{RETURN_POLICY_ZH}}</p>
                 </div>
             </div>
 
@@ -123,7 +125,7 @@
                     <a href="/refund-zh.html" class="hover:text-hokkaido-red">退款政策</a>
                     <a href="/contact-zh.html" class="hover:text-hokkaido-red">聯絡我們</a>
                 </div>
-                <p class="text-xs">© 2025 日本旅行企劃家の私藏清單 ❤️</p>
+                <p class="text-xs">{{COPYRIGHT}}</p>
             </div>
         </div>
     </div>
