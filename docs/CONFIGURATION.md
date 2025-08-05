@@ -34,7 +34,7 @@ Run `npm run build` to generate the final HTML files in the `dist/` directory wi
 2. Find the email field:
    ```json
    "contact": {
-     "email": "miyabisapporo@gmail.com"
+     "email": "ninety840331@gmail.com"
    }
    ```
 3. Change it to your new email:

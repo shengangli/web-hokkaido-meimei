@@ -13,7 +13,7 @@ app.use(express.static('.'));
 const PRODUCTS = {
     'squid-sake-set': {
         // Stripe Configuration - UPDATE THIS WITH NEW PERSON'S PRODUCT ID
-        stripe_id: 'prod_SjqLVrv4i2U3ka', // Was: prod_Sa51z8ECdsm5U0
+        stripe_id: 'prod_SoF3R9jUVkNpow', // Was: prod_Sa51z8ECdsm5U0
         
         // Display Information
         name: '🦑 魷魚酒壺套組',
