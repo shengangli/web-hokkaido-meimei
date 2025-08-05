@@ -34,10 +34,10 @@ const PRODUCTS = {
     
     'new-product': {
         // Stripe Configuration - UPDATE THIS WITH NEW PERSON'S PRODUCT ID
-        stripe_id: 'prod_SjqOb1WUGOGcDe', // Was: prod_SaveAY7nQYrlxS
+        stripe_id: 'prod_SoFVKItHwjy5Bx', // Was: prod_SaveAY7nQYrlxS
         
         // Display Information
-        name: '🎌 日本特色商品',
+        name: '🎌 北海道昆布小酒杯',
         description: '精選日本特色商品，品質保證',
         
         // Pricing Configuration
@@ -53,7 +53,7 @@ const PRODUCTS = {
     
     'tosa-banquet-cup': {
         // Stripe Configuration - UPDATE THIS WITH NEW PERSON'S PRODUCT ID
-        stripe_id: 'prod_SjqRV0939fYU9S', // Was: prod_Sg94KTCgj8JXd5
+        stripe_id: 'prod_SoF3R9jUVkNpow', // Was: prod_Sg94KTCgj8JXd5
         
         // Display Information
         name: '🍶 高知傳統酒席神器｜土佐宴會杯',
